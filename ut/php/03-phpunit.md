@@ -213,12 +213,13 @@ Một số assertion thường dùng:
   }
   ```
 
-Best practice:
-- Sử dụng assertion phù hợp
-  + Code dễ đọc hiểu hơn
-  + Nếu assert failed thì message sinh ra cũng dễ hiểu hơn
-- Signature của các method assert thường có các tham số theo thứ tự là expected value (giá trị mong muốn), actual value (giá trị thực tế khi chạy unit), message (message thông báo nếu fail)
-  + Truyền theo thứ tự để PHPUnit có thể generate ra message báo lỗi chính xác.
+### Best practice:
+Sử dụng assertion phù hợp
+- Code dễ đọc hiểu hơn
+- Nếu assert failed thì message sinh ra cũng dễ hiểu hơn
+
+Signature của các method assert thường có các tham số theo thứ tự là expected value (giá trị mong muốn), actual value (giá trị thực tế khi chạy unit), message (message thông báo nếu fail)
+- Truyền theo thứ tự để PHPUnit có thể generate ra message báo lỗi chính xác.
 
 ```php
 $this->assertEquals($expected, $actual);
