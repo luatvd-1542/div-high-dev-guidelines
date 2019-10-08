@@ -14,7 +14,14 @@ composer require --dev laravel/ui
 php artisan ui --auth bootstrap
 ```
 
-...
+# Refactor `RegisterController`
+Controller `RegisterController` mặc định của Laravel đang gọi Model create user trực tiếp trong controller.
+
+Nhớ lại, chúng ta nên ưu tiên viết unit test để làm cho test case đơn giản và làm cho tốc độ test được nhanh hơn. Unit test sẽ không sử dụng database connection.
+
+Vì Laravel Eloquent phụ thuộc vào database nên nếu gọi trực tiếp Model trong controller thì rất khó thực hiện Unit test mà chỉ có thể thực hiện Integration test, vì rất khó để thực hiện mocking Eloquent Model.
+
+Do đó, chúng ta sẽ thực hiện refactor controller này sử dụng Model Service và Dependency Injection để có thể dễ dạng mock dependency.
 
 ---
 Index
