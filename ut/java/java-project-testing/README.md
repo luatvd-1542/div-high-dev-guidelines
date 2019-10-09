@@ -7,7 +7,7 @@
    * Java 8, Spring boot, Mockito, Junit5 
    
    
-# Guide step  step setting up
+# Guide step by step setting
  * Install Java `1.8` 
  
 
