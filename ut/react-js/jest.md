@@ -1,0 +1,5 @@
+## JEST - Delightful JavaScript Testing
+- [Jest](https://jestjs.io) là một thư viện testing do Facebook Open Source.
+- Nó được tạo ra với mục tiêu trong tâm là sự đơn giản, ban đầu là cho ReactJS, nhưng nó đã vượt xa những nhu cầu ban đầu, để trở thành một thư viện testing cho javascript một cách hoàn chỉnh. Hiện tại, Jest đang hỗ trợ Babel, TypeScript, Node, React, Angular, Vue ...
+- Một trong nhưng ưu điểm lớn của jest là nó làm việc hiệu quả với rất ít các bước setup và configuration. Nó đến với các tính năng chính là assertion library và hỗ trợ mocking. Bạn không cần tốn công để đọc tài liệu setup/configuration mà chỉ cần chú ý tới việc viết unit tests và chạy. 
+- Được thiết kế cho BDD giống như hầu hết các thư viện testing hiện nay. Jest còn có một tính năng đặc biệt, đó là snapshot testing, nó lưu lại snapshot (hay nói cách khác là cấu trúc view tại thời điểm hiện tại) rồi so sánh với snapshot trong tương lai, nếu chúng không giống nhau thì test của chúng ta đã fail hoặc có một số thứ đã thay đổi. 
