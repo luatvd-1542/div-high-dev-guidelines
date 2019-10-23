@@ -36,7 +36,7 @@ Trong bất cứ dự án nào cũng vậy, chúng ta đều có **specification
 
 Đây là đoạn code thực hiện spec đó sau khi nhóm phát triển đã thảo luận:
 
-```
+```javascript
 function filterRating(arr, rating) {
     return arr.filter(function (element) {
         return element.rating >= rating;
@@ -55,7 +55,7 @@ Nhìn có vẻ đủ rồi đấy nhỉ, giờ thì bắt đầu test thôi:
 
 Đầu tiên, tạo 1 file `filterRating.test.js` trong folder `test` và require hàm chúng ta đã tạo, sau đó tạo 1 test block:
 
-```
+```javascript
 const filterRating = require('path-to-file');
 
 describe('filterRating', () => {
@@ -67,7 +67,7 @@ Hàm đầu tiên chúng ta cần biết là `describe`, một hàm trong Jest d
 
 Tiếp theo chúng ta sẽ có thêm 1 hàm `test`, hàm này chính là test block mà chúng ta sẽ implement:
 
-```
+```javascript
 const filterRating = require('path-to-file');
 
 describe('filterRating', () => {
@@ -79,7 +79,7 @@ describe('filterRating', () => {
 
 Lúc này thì chúng ta đã sẵn sàng để có thể viết test rồi. Hãy nhớ rằng testing chỉ là là vấn đề của **input là gì**, **function nào** và **output mong đợi là gì** thôi. Đầu tiên chúng ta sẽ định nghĩa một input đơn giản là một mảng object:
 
-```
+```javascript
 const filterRating = require('path-to-file');
 
 describe('filterRating', () => {
@@ -91,7 +91,7 @@ describe('filterRating', () => {
 
 Sau đó chúng ta sẽ định nghĩa **output mong đợi** sau khi chạy hàm `filterRating` là gì. Theo như spec thì nó sẽ là mảng chứa các object có rating lớn hơn rating nhận vào (trong case này là 5):
 
-```
+```javascript
 const filterRating = require('path-to-file');
 
 describe('filterRating', () => {
@@ -105,7 +105,7 @@ describe('filterRating', () => {
 
 Giờ thì chúng ta đã đủ điều kiện để viết test cho hàm này rồi. Chúng ta sẽ sử dụng `expect` và một `matcher` để check xem kết quả nhận được có đúng với output mà chúng ta mong đợi hay không:
 
-```
+```javascript
 const filterRating = require('path-to-file');
 
 describe('filterRating', () => {
@@ -125,6 +125,8 @@ Giờ thì chúng ta có thể chạy test này để xem nó có pass không nh
 npm test
 ```
 
+![](./images/jest-1.png)
+
 Tuyệt vời, hàm của chúng ta đã chạy đúng như chúng ta nghĩ 🎉🎉🎉
 
 Vậy là xong. Chúng ta đem code này release cho khách hàng và hoàn toàn yên tâm vì đã có test cho nó rồi, lo làm gì? 
@@ -133,17 +135,19 @@ Vậy là xong. Chúng ta đem code này release cho khách hàng và hoàn toà
 
 Quả thật, khi thêm 2 case này vào test suite thì test chạy sẽ bị fail:
 
-```
+```javascript
 const inputArray = null;
 ```
 
-```
+```javascript
 const inputArray = [null];
 ```
 
+![](./images/jest-2.png)
+
 Biết nguyên nhân rồi thì giờ sửa 2 case này thôi:
 
-```
+```javascript
 function filterRating(arr, rating) {
     if (!arr) return [];
     return arr.filter(function (element) {
@@ -156,7 +160,7 @@ function filterRating(arr, rating) {
 
 Sau đó chúng ta cần update test để thêm 2 case chúng ta vừa implement:
 
-```
+```javascript
 const filterRating = require('./filterRating');
 
 describe('filterRating', () => {
@@ -177,6 +181,8 @@ describe('filterRating', () => {
 });
 ```
 
+![](./images/jest-3.png)
+
 Trên đây chỉ là 1 case rất cơ bản trong unit test, bài học rút ra là chúng ta cần đánh giá đầy đủ ảnh hưởng của code và những trường hợp có thể xảy ra để có thể viết test được hiệu quả. 
 
 
@@ -188,7 +194,7 @@ Snapshot test là một kỹ thuật dùng để test UI Component trong React, 
 
 Với React component, thay vì render ra UI thật (yêu cầu cần phải build cả app), bạn có thể sử dụng test renderer để tạo ra một serializable value của React tree. Cùng xem một ví dụ về test cho `Link` component:
 
-```
+```javascript
 import React from 'react';
 import Link from '../Link.react';
 import renderer from 'react-test-renderer';
@@ -203,7 +209,7 @@ it('renders correctly', () => {
 
 Khi test được chạy lần đầu, Jest sẽ tạo ra một file snapshot nhìn như sau:
 
-```
+```javascript
 exports[`renders correctly 1`] = `
 <a
   className="normal"
@@ -222,7 +228,7 @@ File snapshot này cần được commit cùng với code thay đổi, và cần
 
 Một trong những nguyên nhân khiến 2 snapshot không giống nhau có thể là do chúng ta đã thay đổi url của `Link` component trong test case:
 
-```
+```javascript
 it('renders correctly', () => {
   const tree = renderer
     .create(<Link page="http://www.instagram.com">Instagram</Link>)
@@ -230,6 +236,8 @@ it('renders correctly', () => {
   expect(tree).toMatchSnapshot();
 });
 ```
+
+![](./images/jest-4.png)
 
 Bởi vì chúng ta đã thay đổi component để hiển thị một địa chỉ khác, chúng ta cũng cần phải update snapshot cho component này. Bạn có thể chạy Jest với một flag để tạo lại snapshot:
 
@@ -253,7 +261,7 @@ yarn add --dev @testing-library/react
 
 Dưới đây là implementation của một checkbox, nó sẽ thay đổi giữa 2 label dựa vào trạng thái hiện tại:
 
-```
+```javascript
 // CheckboxWithLabel.js
 
 import React from 'react';
@@ -287,7 +295,7 @@ export default class CheckboxWithLabel extends React.Component {
 }
 ```
 
-```
+```javascript
 // __tests__/CheckboxWithLabel-test.js
 import React from 'react';
 import {cleanup, fireEvent, render} from '@testing-library/react';
@@ -327,7 +335,7 @@ yarn add --dev react-addons-test-utils
 
 Với test trên, chúng ta có thể viết lại nó bằng `Enzyme` và sử dụng [shallow renderer](http://airbnb.io/enzyme/docs/api/shallow.html) như ví dụ sau:
 
-```
+```javascript
 // __tests__/CheckboxWithLabel-test.js
 
 import React from 'react';
@@ -350,8 +358,4 @@ Bạn có thể đọc thêm về `Enzyme` tại [đây](https://airbnb.io/enzym
 
 
 ## Writing tests for Redux
-
-
-
-
 
