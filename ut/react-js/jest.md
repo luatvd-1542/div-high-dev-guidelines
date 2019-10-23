@@ -356,6 +356,3 @@ test('CheckboxWithLabel changes the text after click', () => {
 
 Bạn có thể đọc thêm về `Enzyme` tại [đây](https://airbnb.io/enzyme/).
 
-
-## Writing tests for Redux
-
